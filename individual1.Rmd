@@ -1,0 +1,15 @@
+```{r}
+choco <- read.csv('choco.csv')
+```
+
+
+Unfiltered amount of chocolate bars:
+```{r}
+length(choco)
+```
+
+
+Unique amount of chocolate bars:
+```{r}
+length(unique(choco))
+```
