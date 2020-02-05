@@ -1,0 +1,40 @@
+---
+title: "individual2"
+author: "Michael Egle; GitHub: michaelegle"
+date: "2/5/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+
+choco <- read.csv("https://xdaiisu.github.io/ds202materials/hwlabs/choco.csv")
+
+head(choco)
+```
+
+```{r}
+choco %>%
+  ggplot(aes(x = Rating)) +
+  geom_histogram(binwidth = .25)
+```
+
+A majority of the chocolate ratings are concentrated around 3 to 3.5. There are a few outliers on the histogram. One chocolate received a perfect rating of 5 and it appears a few chocolates received a rating of 1.
+ 
+```{r}
+choco %>%
+  ggplot(aes(x = Cocoa.Pct, y = Rating)) +
+  geom_point()
+```
+ 
+It appears that there's not much correlation between the cocoa percentage in the chocolate and the rating that the chocolate received. Let's use the cor() function to confirm
+
+```{r}
+cor(x = choco$Cocoa.Pct, y = choco$Rating)
+```
+
+This confirms our original belief. There is very little to no correlation between the cocoa percentage and the rating.
