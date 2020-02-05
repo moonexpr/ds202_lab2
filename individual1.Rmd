@@ -1,15 +1,43 @@
 ```{r}
+library(tidyverse)
+
 choco <- read.csv('choco.csv')
+names(choco)
+# rows(choco)
 ```
 
 
-Unfiltered amount of chocolate bars:
+
+# What is the overall number of chocolate bars rated?
+
+
+Amount of duplicated rows.
+
 ```{r}
-length(choco)
+nrow(choco[! duplicated(choco), ]) - nrow(choco)
 ```
 
-
-Unique amount of chocolate bars:
 ```{r}
-length(unique(choco))
+length(choco$Rating)
 ```
+
+Because there are no duplicates, we can conclude there are 1852 rated bars.
+
+# Which are the three locations with the most ratings? How do ratings compare across these company locations?
+
+```{r}
+AggRatings <- choco %>%
+  group_by(Company.Location) %>%
+    summarize(AggRatings.Location = n()) %>%
+      arrange(desc(AggRatings.Location)) 
+
+MostPopular <- head(AggRatings, 3)
+
+print(MostPopular)
+
+choco %>%
+  filter(Company.Location == 'U.S.A.') %>%
+    pull(Rating) %>%
+      summary()
+```
+
