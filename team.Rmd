@@ -65,3 +65,6 @@ choco %>%
     pull(Rating) %>%
       summary()
 ```
+
+# 4. Which bean origin yields the highest average rating?
+
