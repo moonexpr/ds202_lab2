@@ -66,5 +66,11 @@ choco %>%
       summary()
 ```
 
-# 4. Which bean origin yields the highest average rating?
+# 4. Brainstorm and write down an interesting question that can be answer from the dataset. The question should not duplicate the questions above.
+
+## Which bean origin yields the highest average rating?
+
+# 5. Answer the question from the dataset.
+
+# 6. Write one paragraph commenting on the workflow.
 
