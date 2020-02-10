@@ -68,9 +68,30 @@ choco %>%
 
 # 4. Brainstorm and write down an interesting question that can be answer from the dataset. The question should not duplicate the questions above.
 
-## Which bean origin yields the highest average rating?
+Which bean origin yields the highest average rating?
 
 # 5. Answer the question from the dataset.
 
+```{r}
+choco %>%
+  group_by(Specific.Bean.Origin) %>%
+  summarize(avg = mean(Rating), count = n()) %>%
+  arrange(desc(avg)) -> choco.origin
+
+choco.origin
+```
+
+There's a lot of bean origins that have only produced one chocolate in the database. Let's filter that to only origins that have produced 10 or more chocolates in the database.
+
+```{r}
+choco.origin %>%
+  filter(count >= 10) -> choco.origin.10
+
+choco.origin.10
+```
+
+It appears that Porcelana has yielded the highest average rating of all the bean origins that have 10 or more chocolates in the database with an average rating of 3.36.
+
 # 6. Write one paragraph commenting on the workflow.
 
+Johnny and I split the work up pretty evenly and I think we worked pretty well together as a team. We both have different skill sets to offer on this lab. He's more experienced in overall programming and knows more about Git. Whereas I'm more experienced in R, so we were able to work together and help each other out when we had questions. 
