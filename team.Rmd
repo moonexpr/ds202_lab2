@@ -1,6 +1,6 @@
 ---
-title: "team"
-author: "Michael Egle and Johnny Chandara; GitHub: michaelegle and mrpotatofactory"
+title: "Lab 2"
+author: "Michael Egle and John Chandara; GitHub: michaelegle and mrpotatofactory"
 date: "2/5/2020"
 output: html_document
 ---
@@ -17,6 +17,22 @@ choco <- read.csv("https://xdaiisu.github.io/ds202materials/hwlabs/choco.csv")
 
 
 
+# 1. What is the overall number of chocolate bars rated?
+
+
+Amount of duplicated rows.
+
+```{r}
+nrow(choco[! duplicated(choco), ]) - nrow(choco)
+```
+
+```{r}
+length(choco$Rating)
+```
+
+Because there are no duplicates, we can conclude there are 1852 rated bars.
+
+
 # 2. How does the number of ratings depend on the year? Draw a bar chart of the number of reports.
 ```{r}
 choco %>%
@@ -29,3 +45,23 @@ choco_ratings %>%
 ```
 
 The number of ratings gradually increases with a peak in 2015 and then a decrease in 2016 and 2017.
+
+
+
+# 3. Which are the three locations with the most ratings? How do ratings compare across these company locations?
+
+```{r}
+AggRatings <- choco %>%
+  group_by(Company.Location) %>%
+    summarize(AggRatings.Location = n()) %>%
+      arrange(desc(AggRatings.Location)) 
+
+MostPopular <- head(AggRatings, 3)
+
+print(MostPopular)
+
+choco %>%
+  filter(Company.Location == 'U.S.A.') %>%
+    pull(Rating) %>%
+      summary()
+```
