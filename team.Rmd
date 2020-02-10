@@ -9,11 +9,23 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-
-
-
-
 ```{r}
+library(tidyverse)
 
+choco <- read.csv("https://xdaiisu.github.io/ds202materials/hwlabs/choco.csv")
 ```
 
+
+
+# 2. How does the number of ratings depend on the year? Draw a bar chart of the number of reports.
+```{r}
+choco %>%
+  group_by(Review.Date) %>%
+  summarize(numRatings = n()) -> choco_ratings
+
+choco_ratings %>%
+  ggplot(aes(x = Review.Date, y = numRatings)) +
+  geom_bar(stat = "identity")
+```
+
+The number of ratings gradually increases with a peak in 2015 and then a decrease in 2016 and 2017.
